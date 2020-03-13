@@ -1,0 +1,19 @@
+# list2-android
+This is a simple list mobile app (to-do list, tasks, shopping list, recipes, and the like) 
+showcasing the implementation of various Android technologies and patterns, including:
+- MVVM pattern with `ViewModel` and `LiveData`
+- Room persistence library
+- Repository pattern
+- Singleton pattern for database and repository
+- Coroutines
+
+## Features
+- Display a list of items (`RecyclerView`, `LiveData`)
+- Navigate to a page to add or edit items (intent, extra, `EditText`)
+- Swipe to delete items (`ItemTouchHelper`)
+- Store items in database (Room, coroutines)
+
+## Requirements
+- Android Studio version 3.6 or higher
+- Android 4.4 (API level 19) or higher
+- Kotlin 1.3 or higher
