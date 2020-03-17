@@ -1,29 +1,39 @@
 package com.example.ltp.list2.ui
 
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ltp.list2.R
 import com.example.ltp.list2.viewmodel.ListItemsViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.fragment_list_items.*
 
-class MainActivity : AppCompatActivity() {
+class ListItemsFragment : Fragment() {
 
-    private val viewModel : ListItemsViewModel by viewModels()
+    private val viewModel: ListItemsViewModel by viewModels()
+    private val navController by lazy { findNavController() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_list_items, container, false)
+    }
 
-        val linearLayoutManager = LinearLayoutManager(this)
-        val listItemsAdapter = ListItemsAdapter(this)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val linearLayoutManager = LinearLayoutManager(context)
+        val listItemsAdapter = ListItemsAdapter(requireContext())
 
         with(recycler_view) {
             adapter = listItemsAdapter
@@ -31,14 +41,16 @@ class MainActivity : AppCompatActivity() {
             addItemDecoration(DividerItemDecoration(context, linearLayoutManager.orientation))
         }
 
-        viewModel.items.observe(this, Observer { items ->
+        viewModel.items.observe(viewLifecycleOwner, Observer { items ->
             items?.let { listItemsAdapter.setItems(it) }
         })
 
         setSwipeToDeleteHandler(listItemsAdapter)
 
         fab.setOnClickListener {
-            startActivity(ItemActivity.newIntent(this))
+            navController.navigate(
+                ListItemsFragmentDirections.actionListItemsFragmentToItemFragment()
+            )
         }
     }
 

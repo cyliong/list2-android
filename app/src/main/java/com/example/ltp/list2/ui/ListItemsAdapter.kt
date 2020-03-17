@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ltp.list2.R
 import com.example.ltp.list2.db.ListItem
@@ -36,13 +37,15 @@ class ListItemsAdapter(private val context: Context) :
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        private val navController by lazy { itemView.findNavController() }
+
         private var item: ListItem? = null
 
         init {
             itemView.setOnClickListener {
                 item?.let {
-                    context.startActivity(
-                        ItemActivity.newIntent(context, it.id)
+                    navController.navigate(
+                        ListItemsFragmentDirections.actionListItemsFragmentToItemFragment(it.id)
                     )
                 }
             }

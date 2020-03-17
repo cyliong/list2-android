@@ -10,7 +10,7 @@ interface ListItemDao {
     fun getAll(): LiveData<List<ListItem>>
 
     @Query("SELECT * FROM list_item WHERE id=(:id)")
-    fun getItem(id: Int): LiveData<ListItem>
+    suspend fun loadItem(id: Int): ListItem?
 
     @Insert
     suspend fun insert(item: ListItem)

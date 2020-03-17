@@ -1,6 +1,8 @@
 # list2-android
 This is a simple list mobile app (to-do list, tasks, shopping list, recipes, and the like) 
-showcasing the implementation of various Android technologies and patterns, including:
+showcasing the implementation of CRUD operations 
+with various Android technologies and patterns, including:
+- Single-activity architecture with Navigation component
 - MVVM pattern with `ViewModel` and `LiveData`
 - Room persistence library
 - Repository pattern
@@ -9,7 +11,7 @@ showcasing the implementation of various Android technologies and patterns, incl
 
 ## Features
 - Display a list of items (`RecyclerView`, `LiveData`)
-- Navigate to a page to add or edit items (intent, extra, `EditText`)
+- Navigate to a page to add or edit items (Navigation component, Safe Args, `EditText`)
 - Swipe to delete items (`ItemTouchHelper`)
 - Store items in database (Room, coroutines)
 

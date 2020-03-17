@@ -2,6 +2,7 @@ package com.example.ltp.list2.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.ltp.list2.db.AppDatabase
 import com.example.ltp.list2.db.ListItem
@@ -12,14 +13,16 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: ListRepository
 
-    var item: ListItem? = null
+    val item = MutableLiveData<ListItem?>()
 
     init {
         val listItemDao = AppDatabase.getInstance(application).listItemDao()
         repository = ListRepository.getInstance(listItemDao)
     }
 
-    fun getItem(id: Int) = repository.getItem(id)
+    fun loadItem(id: Int) = viewModelScope.launch {
+        item.value = repository.loadItem(id)
+    }
 
     fun insert(item: ListItem) = viewModelScope.launch {
         repository.insert(item)

@@ -8,7 +8,7 @@ class ListRepository(private val listItemDao: ListItemDao) {
 
     val items: LiveData<List<ListItem>> = listItemDao.getAll()
 
-    fun getItem(id: Int) = listItemDao.getItem(id)
+    suspend fun loadItem(id: Int) = listItemDao.loadItem(id)
 
     suspend fun insert(item: ListItem) = listItemDao.insert(item)
 
