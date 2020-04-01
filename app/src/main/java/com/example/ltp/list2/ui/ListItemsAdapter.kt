@@ -2,13 +2,11 @@ package com.example.ltp.list2.ui
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ltp.list2.R
+import com.example.ltp.list2.databinding.RecyclerViewItemBinding
 import com.example.ltp.list2.db.ListItem
-import kotlinx.android.synthetic.main.recycler_view_item.view.*
 
 class ListItemsAdapter(private val context: Context) :
     RecyclerView.Adapter<ListItemsAdapter.ViewHolder>() {
@@ -17,9 +15,11 @@ class ListItemsAdapter(private val context: Context) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
-            LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.recycler_view_item, parent, false)
+            RecyclerViewItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -35,7 +35,8 @@ class ListItemsAdapter(private val context: Context) :
 
     fun getItemAtPosition(position: Int) = items[position]
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(private val binding: RecyclerViewItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         private val navController by lazy { itemView.findNavController() }
 
@@ -53,7 +54,7 @@ class ListItemsAdapter(private val context: Context) :
 
         fun bind(item: ListItem) {
             this.item = item
-            itemView.text_view_list_item.text = item.title
+            binding.textViewListItem.text = item.title
         }
 
     }

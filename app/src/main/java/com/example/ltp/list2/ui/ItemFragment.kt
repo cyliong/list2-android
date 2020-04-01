@@ -10,11 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.ltp.list2.R
+import com.example.ltp.list2.databinding.FragmentItemBinding
 import com.example.ltp.list2.db.ListItem
 import com.example.ltp.list2.viewmodel.ItemViewModel
-import kotlinx.android.synthetic.main.fragment_item.*
 
 class ItemFragment : Fragment() {
+
+    private var _binding: FragmentItemBinding? = null
+    private val binding get() = _binding!!
 
     private val args: ItemFragmentArgs by navArgs()
     private val viewModel : ItemViewModel by viewModels()
@@ -25,7 +28,8 @@ class ItemFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_item, container, false)
+        _binding = FragmentItemBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,7 +41,7 @@ class ItemFragment : Fragment() {
                 viewModel.loadItem(itemId)
                 viewModel.item.observe(viewLifecycleOwner, Observer {
                     it?.let {
-                        edit_text_item_title.append(it.title)
+                        binding.editTextItemTitle.append(it.title)
                     }
                 })
             }
@@ -45,7 +49,12 @@ class ItemFragment : Fragment() {
             (activity as AppCompatActivity).supportActionBar?.title  = "New Item"
         }
 
-        edit_text_item_title.requestFocus()
+        binding.editTextItemTitle.requestFocus()
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -55,7 +64,7 @@ class ItemFragment : Fragment() {
 
     override fun onOptionsItemSelected(menuItem: MenuItem) = when (menuItem.itemId) {
         R.id.action_save -> {
-            val title = edit_text_item_title.text?.toString()
+            val title = binding.editTextItemTitle.text?.toString()
             if (title.isNullOrBlank()) {
                 Toast.makeText(
                     requireContext(),

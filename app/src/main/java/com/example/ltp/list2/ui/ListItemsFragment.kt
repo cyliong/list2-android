@@ -12,11 +12,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ltp.list2.R
+import com.example.ltp.list2.databinding.FragmentListItemsBinding
 import com.example.ltp.list2.viewmodel.ListItemsViewModel
-import kotlinx.android.synthetic.main.fragment_list_items.*
 
 class ListItemsFragment : Fragment() {
+
+    private var _binding: FragmentListItemsBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: ListItemsViewModel by viewModels()
     private val navController by lazy { findNavController() }
@@ -26,7 +28,8 @@ class ListItemsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_list_items, container, false)
+        _binding = FragmentListItemsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,7 +38,7 @@ class ListItemsFragment : Fragment() {
         val linearLayoutManager = LinearLayoutManager(context)
         val listItemsAdapter = ListItemsAdapter(requireContext())
 
-        with(recycler_view) {
+        with(binding.recyclerView) {
             adapter = listItemsAdapter
             layoutManager = linearLayoutManager
             addItemDecoration(DividerItemDecoration(context, linearLayoutManager.orientation))
@@ -47,11 +50,16 @@ class ListItemsFragment : Fragment() {
 
         setSwipeToDeleteHandler(listItemsAdapter)
 
-        fab.setOnClickListener {
+        binding.fab.setOnClickListener {
             navController.navigate(
                 ListItemsFragmentDirections.actionListItemsFragmentToItemFragment()
             )
         }
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
     private fun setSwipeToDeleteHandler(listItemsAdapter: ListItemsAdapter) {
@@ -74,7 +82,7 @@ class ListItemsFragment : Fragment() {
         }
 
         ItemTouchHelper(swipeToDeleteHandler)
-            .attachToRecyclerView(recycler_view)
+            .attachToRecyclerView(binding.recyclerView)
     }
 
 }
