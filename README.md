@@ -17,6 +17,6 @@ with various Android technologies and patterns, including:
 - Store items in database (Room, coroutines)
 
 ## Requirements
-- Android Studio version 3.6 or higher
+- Android Studio version 4.0 or higher
 - Android 4.4 (API level 19) or higher
 - Kotlin 1.3 or higher
