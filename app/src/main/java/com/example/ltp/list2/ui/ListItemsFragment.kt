@@ -36,7 +36,7 @@ class ListItemsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val linearLayoutManager = LinearLayoutManager(context)
-        val listItemsAdapter = ListItemsAdapter(requireContext())
+        val listItemsAdapter = ListItemsAdapter()
 
         with(binding.recyclerView) {
             adapter = listItemsAdapter

@@ -1,6 +1,5 @@
 package com.example.ltp.list2.ui
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -8,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ltp.list2.databinding.RecyclerViewItemBinding
 import com.example.ltp.list2.db.ListItem
 
-class ListItemsAdapter(private val context: Context) :
-    RecyclerView.Adapter<ListItemsAdapter.ViewHolder>() {
+class ListItemsAdapter : RecyclerView.Adapter<ListItemsAdapter.ViewHolder>() {
 
     private var items = emptyList<ListItem>()
 
