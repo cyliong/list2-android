@@ -44,7 +44,7 @@ class ListItemsFragment : Fragment() {
             addItemDecoration(DividerItemDecoration(context, linearLayoutManager.orientation))
         }
 
-        viewModel.items.observe(viewLifecycleOwner, Observer { items ->
+        viewModel.getItems().observe(viewLifecycleOwner, Observer { items ->
             items?.let { listItemsAdapter.setItems(it) }
         })
 

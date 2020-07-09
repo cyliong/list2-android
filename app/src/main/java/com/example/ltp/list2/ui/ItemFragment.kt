@@ -38,8 +38,7 @@ class ItemFragment : Fragment() {
         val itemId = args.itemId
         if (itemId > 0) {
             if (savedInstanceState == null) {
-                viewModel.loadItem(itemId)
-                viewModel.item.observe(viewLifecycleOwner, Observer {
+                viewModel.getItem(itemId).observe(viewLifecycleOwner, Observer {
                     it?.let {
                         binding.editTextItemTitle.append(it.title)
                     }
@@ -73,7 +72,7 @@ class ItemFragment : Fragment() {
                 ).show()
                 false
             } else {
-                val item = viewModel.item.value
+                val item = viewModel.item
                 if (item == null) {
                     viewModel.insert(ListItem(title = title))
                 } else {
