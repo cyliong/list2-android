@@ -3,4 +3,6 @@
     <string name="activity_item_title">Edit Item</string>
     <string name="action_save">Save</string>
     <string name="edit_text_item_title_hint">Enter an item</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
