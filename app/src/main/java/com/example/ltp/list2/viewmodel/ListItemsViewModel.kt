@@ -19,7 +19,7 @@ class ListItemsViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun getItems() = liveData {
-        emitSource(repository.items)
+        emitSource(repository.itemsLiveData)
     }
 
     fun delete(item: ListItem) =  viewModelScope.launch {
