@@ -1,5 +1,6 @@
 package com.example.ltp.list2.widget
 
+import android.R
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
@@ -17,40 +18,30 @@ class ListRemoteViewsFactory(
     intent: Intent
 ) : RemoteViewsService.RemoteViewsFactory {
 
+    private lateinit var widgetItems: List<String>
+
     override fun onCreate() {
-        TODO("Not yet implemented")
+        widgetItems = (1..10).map { "Item $it" }
     }
 
-    override fun onDataSetChanged() {
-        TODO("Not yet implemented")
-    }
+    override fun onDataSetChanged() {}
 
-    override fun onDestroy() {
-        TODO("Not yet implemented")
-    }
+    override fun onDestroy() {}
 
-    override fun getCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getCount() = widgetItems.size
 
     override fun getViewAt(position: Int): RemoteViews {
-        TODO("Not yet implemented")
+        return RemoteViews(context.packageName, R.layout.simple_list_item_1).apply {
+            setTextViewText(R.id.text1,widgetItems[position])
+        }
     }
 
-    override fun getLoadingView(): RemoteViews {
-        TODO("Not yet implemented")
-    }
+    override fun getLoadingView(): RemoteViews? = null
 
-    override fun getViewTypeCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getViewTypeCount() = 1
 
-    override fun getItemId(position: Int): Long {
-        TODO("Not yet implemented")
-    }
+    override fun getItemId(position: Int) = position.toLong()
 
-    override fun hasStableIds(): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun hasStableIds() = true
 
 }
