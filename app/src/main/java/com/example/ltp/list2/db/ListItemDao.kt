@@ -9,6 +9,9 @@ interface ListItemDao {
     @Query("SELECT * FROM list_item")
     fun getItemsLiveData(): LiveData<List<ListItem>>
 
+    @Query("SELECT * FROM list_item")
+    suspend fun loadItems(): List<ListItem>
+
     @Query("SELECT * FROM list_item WHERE id=(:id)")
     suspend fun loadItem(id: Int): ListItem?
 
