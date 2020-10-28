@@ -3,6 +3,7 @@ package com.example.ltp.list2.widget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
 import android.widget.RemoteViews
 import com.example.ltp.list2.R
 
@@ -35,8 +36,12 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
+    val intent = Intent(context, ListWidgetService::class.java)
+
     // Construct the RemoteViews object
-    val views = RemoteViews(context.packageName, R.layout.list_widget)
+    val views = RemoteViews(context.packageName, R.layout.list_widget).apply {
+        setRemoteAdapter(R.id.list_view, intent)
+    }
 
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
