@@ -6,7 +6,7 @@ import com.example.ltp.list2.db.ListItemDao
 
 class ListRepository(private val listItemDao: ListItemDao) {
 
-    val items: LiveData<List<ListItem>> = listItemDao.getAll()
+    val items: LiveData<List<ListItem>> = listItemDao.getItemsLiveData()
 
     suspend fun loadItem(id: Int) = listItemDao.loadItem(id)
 
