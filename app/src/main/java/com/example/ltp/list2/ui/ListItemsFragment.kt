@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -44,7 +43,7 @@ class ListItemsFragment : Fragment() {
             addItemDecoration(DividerItemDecoration(context, linearLayoutManager.orientation))
         }
 
-        viewModel.getItems().observe(viewLifecycleOwner, Observer { items ->
+        viewModel.getItems().observe(viewLifecycleOwner, { items ->
             items?.let { listItemsAdapter.setItems(it) }
         })
 
