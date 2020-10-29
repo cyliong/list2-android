@@ -1,10 +1,14 @@
 package com.example.ltp.list2.widget
 
-import android.R
+import android.R.id.text1
+import android.R.layout.simple_list_item_1
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
+import com.example.ltp.list2.db.AppDatabase
+import com.example.ltp.list2.db.ListItem
+import com.example.ltp.list2.repository.ListRepository
 
 class ListWidgetService : RemoteViewsService() {
 
@@ -18,21 +22,28 @@ class ListRemoteViewsFactory(
     intent: Intent
 ) : RemoteViewsService.RemoteViewsFactory {
 
-    private lateinit var widgetItems: List<String>
+    private lateinit var items: List<ListItem>
 
-    override fun onCreate() {
-        widgetItems = (1..10).map { "Item $it" }
+    private val repository: ListRepository
+
+    init {
+        val listItemDao = AppDatabase.getInstance(context).listItemDao()
+        repository = ListRepository.getInstance(listItemDao)
     }
 
-    override fun onDataSetChanged() {}
+    override fun onCreate() {}
+
+    override fun onDataSetChanged() {
+        items = repository.items
+    }
 
     override fun onDestroy() {}
 
-    override fun getCount() = widgetItems.size
+    override fun getCount() = items.size
 
     override fun getViewAt(position: Int): RemoteViews {
-        return RemoteViews(context.packageName, R.layout.simple_list_item_1).apply {
-            setTextViewText(R.id.text1,widgetItems[position])
+        return RemoteViews(context.packageName, simple_list_item_1).apply {
+            setTextViewText(text1, items[position].title)
         }
     }
 
