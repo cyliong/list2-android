@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.ltp.list2.R
@@ -38,7 +37,7 @@ class ItemFragment : Fragment() {
         val itemId = args.itemId
         if (itemId > 0) {
             if (savedInstanceState == null) {
-                viewModel.getItem(itemId).observe(viewLifecycleOwner, Observer {
+                viewModel.getItem(itemId).observe(viewLifecycleOwner, {
                     it?.let {
                         binding.editTextItemTitle.append(it.title)
                     }
