@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.ltp.list2.R
 import com.example.ltp.list2.databinding.FragmentItemBinding
 import com.example.ltp.list2.db.ListItem
+import com.example.ltp.list2.extension.reloadWidget
 import com.example.ltp.list2.viewmodel.ItemViewModel
 
 class ItemFragment : Fragment() {
@@ -78,6 +79,7 @@ class ItemFragment : Fragment() {
                     item.title = title
                     viewModel.update(item)
                 }
+                reloadWidget()
                 findNavController().navigateUp()
                 true
             }

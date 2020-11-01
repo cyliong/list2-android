@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ltp.list2.databinding.FragmentListItemsBinding
+import com.example.ltp.list2.extension.reloadWidget
 import com.example.ltp.list2.viewmodel.ListItemsViewModel
 
 class ListItemsFragment : Fragment() {
@@ -77,6 +78,7 @@ class ListItemsFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val item = listItemsAdapter.getItemAtPosition(viewHolder.adapterPosition)
                 viewModel.delete(item)
+                reloadWidget()
             }
         }
 
