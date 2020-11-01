@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:text="@string/appwidget_title"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white" />
 
     <ListView
         android:id="@+id/list_view"
