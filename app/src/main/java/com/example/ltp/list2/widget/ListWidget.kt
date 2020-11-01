@@ -3,6 +3,7 @@ package com.example.ltp.list2.widget
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
@@ -13,6 +14,7 @@ import com.example.ltp.list2.ui.MainActivity
  * Implementation of App Widget functionality.
  */
 class ListWidget : AppWidgetProvider() {
+
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -24,6 +26,18 @@ class ListWidget : AppWidgetProvider() {
         }
     }
 
+    override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action == AppWidgetManager.ACTION_APPWIDGET_UPDATE) {
+            AppWidgetManager.getInstance(context).apply {
+                notifyAppWidgetViewDataChanged(
+                    getAppWidgetIds(ComponentName(context, ListWidget::class.java)),
+                    R.id.list_view
+                )
+            }
+        }
+        super.onReceive(context, intent)
+    }
+
     override fun onEnabled(context: Context) {
         // Enter relevant functionality for when the first widget is created
     }
@@ -31,6 +45,7 @@ class ListWidget : AppWidgetProvider() {
     override fun onDisabled(context: Context) {
         // Enter relevant functionality for when the last widget is disabled
     }
+
 }
 
 internal fun updateAppWidget(
