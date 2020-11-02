@@ -4,10 +4,12 @@ import android.R.id.text1
 import android.R.layout.simple_list_item_1
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.example.ltp.list2.db.AppDatabase
 import com.example.ltp.list2.db.ListItem
+import com.example.ltp.list2.extension.isDarkTheme
 import com.example.ltp.list2.repository.ListRepository
 
 class ListWidgetService : RemoteViewsService() {
@@ -44,6 +46,7 @@ class ListRemoteViewsFactory(
     override fun getViewAt(position: Int): RemoteViews {
         return RemoteViews(context.packageName, simple_list_item_1).apply {
             setTextViewText(text1, items[position].title)
+            setTextColor(text1, if (context.isDarkTheme) Color.WHITE else Color.BLACK)
         }
     }
 
