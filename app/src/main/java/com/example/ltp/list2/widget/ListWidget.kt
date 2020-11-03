@@ -10,6 +10,8 @@ import android.widget.RemoteViews
 import com.example.ltp.list2.R
 import com.example.ltp.list2.ui.MainActivity
 
+const val EXTRA_ITEM_ID = "com.example.ltp.list2.widget.EXTRA_ITEM_ID"
+
 /**
  * Implementation of App Widget functionality.
  */
