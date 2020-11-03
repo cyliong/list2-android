@@ -11,6 +11,7 @@ import com.example.ltp.list2.R
 import com.example.ltp.list2.ui.MainActivity
 
 const val EXTRA_ITEM_ID = "com.example.ltp.list2.widget.EXTRA_ITEM_ID"
+private const val EDIT_ACTION = "com.example.ltp.list2.widget.EDIT_ACTION"
 
 /**
  * Implementation of App Widget functionality.
@@ -59,13 +60,20 @@ internal fun updateAppWidget(
         .let { intent ->
             PendingIntent.getActivity(context, 0, intent, 0)
         }
+
     val intent = Intent(context, ListWidgetService::class.java)
+
+    val pendingIntentTemplate: PendingIntent = Intent(context, ListWidget::class.java)
+        .run {
+            action = EDIT_ACTION
+            PendingIntent.getBroadcast(context, 0, this, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
 
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.list_widget).apply {
         setRemoteAdapter(R.id.list_view, intent)
         setOnClickPendingIntent(R.id.text_view_title, pendingIntent)
-        setPendingIntentTemplate(R.id.list_view, pendingIntent)
+        setPendingIntentTemplate(R.id.list_view, pendingIntentTemplate)
     }
 
     // Instruct the widget manager to update the widget
