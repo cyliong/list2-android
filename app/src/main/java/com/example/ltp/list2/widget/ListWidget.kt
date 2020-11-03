@@ -63,6 +63,7 @@ internal fun updateAppWidget(
     val views = RemoteViews(context.packageName, R.layout.list_widget).apply {
         setRemoteAdapter(R.id.list_view, intent)
         setOnClickPendingIntent(R.id.text_view_title, pendingIntent)
+        setPendingIntentTemplate(R.id.list_view, pendingIntent)
     }
 
     // Instruct the widget manager to update the widget
