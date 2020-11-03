@@ -7,7 +7,9 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
+import androidx.navigation.NavDeepLinkBuilder
 import com.example.ltp.list2.R
+import com.example.ltp.list2.ui.ItemFragmentArgs
 import com.example.ltp.list2.ui.MainActivity
 
 const val EXTRA_ITEM_ID = "com.example.ltp.list2.widget.EXTRA_ITEM_ID"
@@ -37,6 +39,15 @@ class ListWidget : AppWidgetProvider() {
                     R.id.list_view
                 )
             }
+        } else if (intent.action == EDIT_ACTION) {
+            val itemId = intent.getIntExtra(EXTRA_ITEM_ID, 0)
+
+            NavDeepLinkBuilder(context)
+                .setGraph(R.navigation.nav_graph)
+                .setDestination(R.id.itemFragment)
+                .setArguments(ItemFragmentArgs(itemId).toBundle())
+                .createPendingIntent()
+                .send()
         }
         super.onReceive(context, intent)
     }
