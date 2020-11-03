@@ -5,9 +5,9 @@ import android.R.layout.simple_list_item_1
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.os.Bundle
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
+import androidx.core.os.bundleOf
 import com.example.ltp.list2.db.AppDatabase
 import com.example.ltp.list2.db.ListItem
 import com.example.ltp.list2.extension.isDarkTheme
@@ -50,10 +50,7 @@ class ListRemoteViewsFactory(
             setTextColor(text1, if (context.isDarkTheme) Color.WHITE else Color.BLACK)
 
             val fillInIntent = Intent().apply {
-                Bundle().also { extras ->
-                    extras.putInt(EXTRA_ITEM_ID, items[position].id)
-                    putExtras(extras)
-                }
+                putExtras(bundleOf(EXTRA_ITEM_ID to items[position].id))
             }
             setOnClickFillInIntent(text1, fillInIntent)
         }
