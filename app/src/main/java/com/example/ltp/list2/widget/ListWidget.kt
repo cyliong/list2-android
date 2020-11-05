@@ -85,6 +85,9 @@ internal fun updateAppWidget(
         setRemoteAdapter(R.id.list_view, intent)
         setOnClickPendingIntent(R.id.text_view_title, pendingIntent)
         setPendingIntentTemplate(R.id.list_view, pendingIntentTemplate)
+
+        setEmptyView(R.id.list_view, R.id.empty_view)
+        setOnClickPendingIntent(R.id.empty_view, pendingIntent)
     }
 
     // Instruct the widget manager to update the widget
