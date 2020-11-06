@@ -4,4 +4,5 @@
     <string name="action_save">Save</string>
     <string name="edit_text_item_title_hint">Enter an item</string>
     <string name="appwidget_title">List</string>
+    <string name="empty_view_text">No Items</string>
 </resources>
