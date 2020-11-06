@@ -1,5 +1,6 @@
 <resources>
     <style name="ThemeOverlay.List2.AppWidgetContainer" parent="">
         <item name="appWidgetBackgroundColor">@color/white</item>
+        <item name="appWidgetTextColor">@color/black</item>
     </style>
 </resources>
