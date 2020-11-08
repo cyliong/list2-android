@@ -72,6 +72,11 @@ internal fun updateAppWidget(
             PendingIntent.getActivity(context, 0, intent, 0)
         }
 
+    val addItemPendingIntent = NavDeepLinkBuilder(context)
+        .setGraph(R.navigation.nav_graph)
+        .setDestination(R.id.itemFragment)
+        .createPendingIntent()
+
     val intent = Intent(context, ListWidgetService::class.java)
 
     val pendingIntentTemplate: PendingIntent = Intent(context, ListWidget::class.java)
@@ -84,6 +89,7 @@ internal fun updateAppWidget(
     val views = RemoteViews(context.packageName, R.layout.list_widget).apply {
         setRemoteAdapter(R.id.list_view, intent)
         setOnClickPendingIntent(R.id.text_view_title, pendingIntent)
+        setOnClickPendingIntent(R.id.image_button_add, addItemPendingIntent)
         setPendingIntentTemplate(R.id.list_view, pendingIntentTemplate)
 
         setEmptyView(R.id.list_view, R.id.empty_view)
