@@ -15,13 +15,12 @@ import com.example.ltp.list2.repository.ListRepository
 class ListWidgetService : RemoteViewsService() {
 
     override fun onGetViewFactory(intent: Intent) =
-        ListRemoteViewsFactory(this.applicationContext, intent)
+        ListRemoteViewsFactory(this.applicationContext)
 
 }
 
 class ListRemoteViewsFactory(
-    private val context: Context,
-    intent: Intent
+    private val context: Context
 ) : RemoteViewsService.RemoteViewsFactory {
 
     private lateinit var items: List<ListItem>
