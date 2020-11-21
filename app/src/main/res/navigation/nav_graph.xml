@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/listItemsFragment"
         android:name="com.example.ltp.list2.ui.ListItemsFragment"
-        android:label="List"
+        android:label="@string/list_title"
         tools:layout="@layout/fragment_list_items" >
         <action
             android:id="@+id/action_listItemsFragment_to_itemFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/itemFragment"
         android:name="com.example.ltp.list2.ui.ItemFragment"
-        android:label="Edit Item"
+        android:label="@string/edit_item_title"
         tools:layout="@layout/fragment_item" >
         <argument
             android:name="item_id"
