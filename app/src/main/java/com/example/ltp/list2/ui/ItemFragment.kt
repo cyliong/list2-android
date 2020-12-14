@@ -26,7 +26,7 @@ class ItemFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setHasOptionsMenu(true)
         _binding = FragmentItemBinding.inflate(inflater, container, false)
         return binding.root
