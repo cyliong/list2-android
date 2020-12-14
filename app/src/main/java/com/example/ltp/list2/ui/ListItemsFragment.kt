@@ -27,7 +27,7 @@ class ListItemsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentListItemsBinding.inflate(inflater, container, false)
         return binding.root
     }
