@@ -20,7 +20,9 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".widget.ListWidget">
+        <receiver
+            android:name=".widget.ListWidget"
+            android:label="@string/appwidget_title">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
