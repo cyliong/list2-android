@@ -15,6 +15,7 @@ with various Android technologies and patterns, including:
 - Navigate to a page to add or edit items (Navigation component, Safe Args, `EditText`)
 - Swipe to delete items (`ItemTouchHelper`)
 - Store items in database (Room, coroutines)
+- Database migration
 
 ## Widget
 This project also implements a widget that can be added to the Home screen, with the following features:
