@@ -26,6 +26,6 @@ This project also implements a widget that can be added to the Home screen, with
 - Widget will be updated when list items are modified from the app (Broadcast using the `ACTION_APPWIDGET_UPDATE` `Intent`)
 
 ## Requirements
-- Android Studio version 4.1.1 or higher
+- Android Studio version 4.1.2 or higher
 - Android 4.4 (API level 19) or higher
 - Kotlin 1.4 or higher
