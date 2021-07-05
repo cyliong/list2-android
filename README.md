@@ -33,6 +33,6 @@ with the following features:
   (Broadcast using the `ACTION_APPWIDGET_UPDATE` `Intent`)
 
 ## Requirements
-- Android Studio version 4.2.1 or higher
+- Android Studio version 4.2.2 or higher
 - Android 4.4 (API level 19) or higher
 - Kotlin 1.5 or higher
