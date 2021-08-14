@@ -4,7 +4,15 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnLifecycleDestroyed
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -35,7 +43,17 @@ class ItemFragment : Fragment() {
                 DisposeOnLifecycleDestroyed(viewLifecycleOwner)
             )
             setContent {
-
+                MaterialTheme {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        TextField(
+                            value = "",
+                            onValueChange = { },
+                            placeholder = { Text("Enter an item") },
+                            singleLine = true,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                }
             }
         }
         return binding.root
