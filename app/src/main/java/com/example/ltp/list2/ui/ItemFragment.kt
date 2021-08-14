@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnLifecycleDestroyed
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -20,7 +21,7 @@ class ItemFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val args: ItemFragmentArgs by navArgs()
-    private val viewModel : ItemViewModel by viewModels()
+    private val viewModel: ItemViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +30,14 @@ class ItemFragment : Fragment() {
     ): View {
         setHasOptionsMenu(true)
         _binding = FragmentItemBinding.inflate(inflater, container, false)
+        binding.composeView.apply {
+            setViewCompositionStrategy(
+                DisposeOnLifecycleDestroyed(viewLifecycleOwner)
+            )
+            setContent {
+
+            }
+        }
         return binding.root
     }
 
@@ -45,7 +54,7 @@ class ItemFragment : Fragment() {
                 })
             }
         } else {
-            (activity as AppCompatActivity).supportActionBar?.title  = "New Item"
+            (activity as AppCompatActivity).supportActionBar?.title = "New Item"
         }
     }
 
