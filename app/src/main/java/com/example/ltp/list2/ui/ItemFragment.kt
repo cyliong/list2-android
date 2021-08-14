@@ -19,7 +19,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.ltp.list2.R
 import com.example.ltp.list2.databinding.FragmentItemBinding
-import com.example.ltp.list2.db.ListItem
 import com.example.ltp.list2.extension.reloadWidget
 import com.example.ltp.list2.viewmodel.ItemViewModel
 
@@ -30,6 +29,8 @@ class ItemFragment : Fragment() {
 
     private val args: ItemFragmentArgs by navArgs()
     private val viewModel: ItemViewModel by viewModels()
+
+    private var isNew = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,8 +47,10 @@ class ItemFragment : Fragment() {
                 MaterialTheme {
                     Column(modifier = Modifier.padding(8.dp)) {
                         TextField(
-                            value = "",
-                            onValueChange = { },
+                            value = viewModel.currentItem.title,
+                            onValueChange = {
+                                viewModel.currentItem = viewModel.currentItem.copy(title = it)
+                            },
                             placeholder = { Text("Enter an item") },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth()
@@ -67,7 +70,8 @@ class ItemFragment : Fragment() {
             if (savedInstanceState == null) {
                 viewModel.getItem(itemId).observe(viewLifecycleOwner, {
                     it?.let {
-
+                        viewModel.currentItem = it
+                        isNew = false
                     }
                 })
             }
@@ -88,8 +92,8 @@ class ItemFragment : Fragment() {
 
     override fun onOptionsItemSelected(menuItem: MenuItem) = when (menuItem.itemId) {
         R.id.action_save -> {
-            val title: String? = null
-            if (title.isNullOrBlank()) {
+            val item = viewModel.currentItem
+            if (item.title.isNullOrBlank()) {
                 Toast.makeText(
                     requireContext(),
                     "Please enter an item.",
@@ -97,11 +101,9 @@ class ItemFragment : Fragment() {
                 ).show()
                 false
             } else {
-                val item = viewModel.item
-                if (item == null) {
-                    viewModel.insert(ListItem(title = title))
+                if (isNew) {
+                    viewModel.insert(item)
                 } else {
-                    item.title = title
                     viewModel.update(item)
                 }
                 reloadWidget()
