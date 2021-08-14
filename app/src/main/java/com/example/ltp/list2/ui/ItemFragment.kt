@@ -40,15 +40,13 @@ class ItemFragment : Fragment() {
             if (savedInstanceState == null) {
                 viewModel.getItem(itemId).observe(viewLifecycleOwner, {
                     it?.let {
-                        binding.editTextItemTitle.append(it.title)
+
                     }
                 })
             }
         } else {
             (activity as AppCompatActivity).supportActionBar?.title  = "New Item"
         }
-
-        binding.editTextItemTitle.requestFocus()
     }
 
     override fun onDestroyView() {
@@ -63,7 +61,7 @@ class ItemFragment : Fragment() {
 
     override fun onOptionsItemSelected(menuItem: MenuItem) = when (menuItem.itemId) {
         R.id.action_save -> {
-            val title = binding.editTextItemTitle.text?.toString()
+            val title: String? = null
             if (title.isNullOrBlank()) {
                 Toast.makeText(
                     requireContext(),
