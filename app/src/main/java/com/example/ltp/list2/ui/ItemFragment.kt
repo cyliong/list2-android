@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnLifecycleDestroyed
 import androidx.compose.ui.unit.dp
@@ -45,17 +46,7 @@ class ItemFragment : Fragment() {
             )
             setContent {
                 MaterialTheme {
-                    Column(modifier = Modifier.padding(8.dp)) {
-                        TextField(
-                            value = viewModel.currentItem.title,
-                            onValueChange = {
-                                viewModel.currentItem = viewModel.currentItem.copy(title = it)
-                            },
-                            placeholder = { Text("Enter an item") },
-                            singleLine = true,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
+                    ItemForm(viewModel)
                 }
             }
         }
@@ -114,4 +105,19 @@ class ItemFragment : Fragment() {
         else -> super.onOptionsItemSelected(menuItem)
     }
 
+}
+
+@Composable
+private fun ItemForm(viewModel: ItemViewModel) {
+    Column(modifier = Modifier.padding(8.dp)) {
+        TextField(
+            value = viewModel.currentItem.title,
+            onValueChange = {
+                viewModel.currentItem = viewModel.currentItem.copy(title = it)
+            },
+            placeholder = { Text("Enter an item") },
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
 }
