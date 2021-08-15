@@ -93,7 +93,7 @@ class ItemFragment : Fragment() {
     override fun onOptionsItemSelected(menuItem: MenuItem) = when (menuItem.itemId) {
         R.id.action_save -> {
             val item = viewModel.currentItem
-            if (item.title.isNullOrBlank()) {
+            if (item.title.isBlank()) {
                 Toast.makeText(
                     requireContext(),
                     "Please enter an item.",
