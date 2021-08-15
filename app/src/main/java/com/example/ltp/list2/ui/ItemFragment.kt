@@ -21,6 +21,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.ltp.list2.R
 import com.example.ltp.list2.databinding.FragmentItemBinding
+import com.example.ltp.list2.db.ListItem
 import com.example.ltp.list2.extension.reloadWidget
 import com.example.ltp.list2.viewmodel.ItemViewModel
 
@@ -110,12 +111,18 @@ class ItemFragment : Fragment() {
 
 @Composable
 private fun ItemForm(viewModel: ItemViewModel) {
+    ItemFormContent(
+        item = viewModel.currentItem,
+        onItemChange = viewModel::onItemChange
+    )
+}
+
+@Composable
+private fun ItemFormContent(item: ListItem, onItemChange: (ListItem) -> Unit) {
     Column(modifier = Modifier.padding(8.dp)) {
         TextField(
-            value = viewModel.currentItem.title,
-            onValueChange = {
-                viewModel.currentItem = viewModel.currentItem.copy(title = it)
-            },
+            value = item.title,
+            onValueChange = { onItemChange(item.copy(title = it)) },
             label = { Text(stringResource(R.string.text_field_item_title_label)) },
             placeholder = { Text(stringResource(R.string.text_field_item_title_placeholder)) },
             singleLine = true,
