@@ -4,6 +4,7 @@
     <string name="action_save">Save</string>
     <string name="list_title">List</string>
     <string name="edit_item_title">Edit Item</string>
+    <string name="text_field_item_title_label">Title</string>
     <string name="text_field_item_title_placeholder">Enter an item</string>
     <string name="appwidget_title">@string/list_title</string>
     <string name="empty_view_text">No Items</string>

@@ -116,6 +116,7 @@ private fun ItemForm(viewModel: ItemViewModel) {
             onValueChange = {
                 viewModel.currentItem = viewModel.currentItem.copy(title = it)
             },
+            label = { Text(stringResource(R.string.text_field_item_title_label)) },
             placeholder = { Text(stringResource(R.string.text_field_item_title_placeholder)) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
