@@ -13,6 +13,7 @@ import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnLifecycleDestroyed
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -115,7 +116,7 @@ private fun ItemForm(viewModel: ItemViewModel) {
             onValueChange = {
                 viewModel.currentItem = viewModel.currentItem.copy(title = it)
             },
-            placeholder = { Text("Enter an item") },
+            placeholder = { Text(stringResource(R.string.text_field_item_title_placeholder)) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
