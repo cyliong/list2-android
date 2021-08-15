@@ -35,4 +35,8 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
         repository.update(item)
     }
 
+    fun onItemChange(item: ListItem) {
+        currentItem = item
+    }
+
 }
