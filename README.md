@@ -5,6 +5,7 @@ showcasing the implementation of CRUD operations
 with various Android technologies and patterns, including:
 - Single-activity architecture with Navigation component
 - MVVM pattern with `ViewModel` and `LiveData`
+- Jetpack Compose (migrated from View-based UI, using `ComposeView`)
 - View Binding
 - Room persistence library
 - Repository pattern
@@ -14,7 +15,7 @@ with various Android technologies and patterns, including:
 ## Features
 - Display a list of items (`RecyclerView`, `LiveData`)
 - Navigate to a page to add or edit items 
-  (Navigation component, Safe Args, `EditText`)
+  (Navigation component, Safe Args, `TextField`)
 - Swipe to delete items (`ItemTouchHelper`)
 - Store items in database (Room, coroutines)
 - Database migration
