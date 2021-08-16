@@ -11,7 +11,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnLifecycleDestroyed
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -121,14 +125,22 @@ private fun ItemForm(viewModel: ItemViewModel) {
 @Composable
 private fun ItemFormContent(item: ListItem, onItemChange: (ListItem) -> Unit) {
     Column(modifier = Modifier.padding(8.dp)) {
+        val focusRequester = remember { FocusRequester() }
+
         TextField(
             value = item.title,
             onValueChange = { onItemChange(item.copy(title = it)) },
             label = { Text(stringResource(R.string.text_field_item_title_label)) },
             placeholder = { Text(stringResource(R.string.text_field_item_title_placeholder)) },
             singleLine = true,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .focusRequester(focusRequester)
+                .fillMaxWidth()
         )
+
+        LaunchedEffect(true) {
+            focusRequester.requestFocus()
+        }
     }
 }
 
