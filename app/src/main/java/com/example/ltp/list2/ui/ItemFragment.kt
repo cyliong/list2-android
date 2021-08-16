@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnLifecycleDestroyed
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -129,4 +130,11 @@ private fun ItemFormContent(item: ListItem, onItemChange: (ListItem) -> Unit) {
             modifier = Modifier.fillMaxWidth()
         )
     }
+}
+
+@Preview
+@Composable
+private fun ItemFormContentPreview() {
+    val item = ListItem(title = "Item 1")
+    ItemFormContent(item) {}
 }
