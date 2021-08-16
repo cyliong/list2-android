@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnLifecycleDestroyed
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,15 +26,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.ltp.list2.R
-import com.example.ltp.list2.databinding.FragmentItemBinding
 import com.example.ltp.list2.db.ListItem
 import com.example.ltp.list2.extension.reloadWidget
 import com.example.ltp.list2.viewmodel.ItemViewModel
 
 class ItemFragment : Fragment() {
-
-    private var _binding: FragmentItemBinding? = null
-    private val binding get() = _binding!!
 
     private val args: ItemFragmentArgs by navArgs()
     private val viewModel: ItemViewModel by viewModels()
@@ -46,8 +43,7 @@ class ItemFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
-        _binding = FragmentItemBinding.inflate(inflater, container, false)
-        binding.composeView.apply {
+        return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(
                 DisposeOnLifecycleDestroyed(viewLifecycleOwner)
             )
@@ -57,7 +53,6 @@ class ItemFragment : Fragment() {
                 }
             }
         }
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,11 +71,6 @@ class ItemFragment : Fragment() {
         } else {
             (activity as AppCompatActivity).supportActionBar?.title = "New Item"
         }
-    }
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
