@@ -5,7 +5,11 @@ showcasing the implementation of CRUD operations
 with various Android technologies and patterns, including:
 - Single-activity architecture with Navigation component
 - MVVM pattern with `ViewModel` and `LiveData`
-- Jetpack Compose (migrated from View-based UI, using `ComposeView`)
+- Jetpack Compose 
+  - Migrated from View-based UI, using `ComposeView`
+  - State hoisting with `MutableState` and `ViewModel`
+  - Composable preview
+  - Side-effect API
 - View Binding
 - Room persistence library
 - Repository pattern
