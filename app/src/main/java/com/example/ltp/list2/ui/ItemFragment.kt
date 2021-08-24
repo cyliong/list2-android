@@ -35,8 +35,6 @@ class ItemFragment : Fragment() {
     private val args: ItemFragmentArgs by navArgs()
     private val viewModel: ItemViewModel by viewModels()
 
-    private var isNew = true
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,7 +62,7 @@ class ItemFragment : Fragment() {
                 viewModel.getItem(itemId).observe(viewLifecycleOwner, {
                     it?.let {
                         viewModel.currentItem = it
-                        isNew = false
+                        viewModel.isNew = false
                     }
                 })
             }
@@ -89,7 +87,7 @@ class ItemFragment : Fragment() {
                 ).show()
                 false
             } else {
-                if (isNew) {
+                if (viewModel.isNew) {
                     viewModel.insert(item)
                 } else {
                     viewModel.update(item)

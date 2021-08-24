@@ -16,6 +16,7 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: ListRepository
 
+    var isNew = true
     var currentItem by mutableStateOf(ListItem(title = ""))
 
     init {
