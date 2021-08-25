@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
@@ -18,6 +20,7 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
 
     var isNew = true
     var currentItem by mutableStateOf(ListItem(title = ""))
+    var titleFieldValue by mutableStateOf(TextFieldValue("", TextRange.Zero))
 
     init {
         val listItemDao = AppDatabase.getInstance(application).listItemDao()
@@ -38,6 +41,10 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
 
     fun onItemChange(item: ListItem) {
         currentItem = item
+    }
+
+    fun onTitleFieldValueChange(titleFieldValue: TextFieldValue) {
+        this.titleFieldValue = titleFieldValue
     }
 
 }

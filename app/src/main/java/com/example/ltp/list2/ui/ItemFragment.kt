@@ -19,6 +19,8 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnLifecycleDestroyed
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
@@ -62,6 +64,8 @@ class ItemFragment : Fragment() {
                 viewModel.getItem(itemId).observe(viewLifecycleOwner, {
                     it?.let {
                         viewModel.currentItem = it
+                        viewModel.titleFieldValue =
+                            TextFieldValue(it.title, TextRange(it.title.length))
                         viewModel.isNew = false
                     }
                 })
@@ -106,18 +110,28 @@ class ItemFragment : Fragment() {
 private fun ItemForm(viewModel: ItemViewModel) {
     ItemFormContent(
         item = viewModel.currentItem,
-        onItemChange = viewModel::onItemChange
+        onItemChange = viewModel::onItemChange,
+        titleFieldValue = viewModel.titleFieldValue,
+        onTitleFieldValueChange = viewModel::onTitleFieldValueChange
     )
 }
 
 @Composable
-private fun ItemFormContent(item: ListItem, onItemChange: (ListItem) -> Unit) {
+private fun ItemFormContent(
+    item: ListItem,
+    onItemChange: (ListItem) -> Unit,
+    titleFieldValue: TextFieldValue,
+    onTitleFieldValueChange: (TextFieldValue) -> Unit
+) {
     Column(modifier = Modifier.padding(8.dp)) {
         val focusRequester = remember { FocusRequester() }
 
         TextField(
-            value = item.title,
-            onValueChange = { onItemChange(item.copy(title = it)) },
+            value = titleFieldValue,
+            onValueChange = {
+                onItemChange(item.copy(title = it.text))
+                onTitleFieldValueChange(it)
+            },
             label = { Text(stringResource(R.string.text_field_item_title_label)) },
             placeholder = { Text(stringResource(R.string.text_field_item_title_placeholder)) },
             singleLine = true,
@@ -136,5 +150,5 @@ private fun ItemFormContent(item: ListItem, onItemChange: (ListItem) -> Unit) {
 @Composable
 private fun ItemFormContentPreview() {
     val item = ListItem(title = "Item 1")
-    ItemFormContent(item) {}
+    ItemFormContent(item, {}, TextFieldValue(item.title, TextRange(item.title.length)), {})
 }
