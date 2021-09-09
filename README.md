@@ -38,6 +38,6 @@ with the following features:
   (Broadcast using the `ACTION_APPWIDGET_UPDATE` `Intent`)
 
 ## Requirements
-- Android Studio Arctic Fox | 2020.3.1 or newer
+- Android Studio Arctic Fox | 2020.3.1 Patch 2 or newer
 - Android 5.0 (API level 21) or higher
 - Kotlin 1.5 or higher
