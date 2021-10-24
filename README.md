@@ -19,7 +19,8 @@ with various Android technologies and patterns, including:
 ## Features
 - Display a list of items (`RecyclerView`, `LiveData`)
 - Navigate to a page to add or edit items 
-  (Navigation component, Safe Args, `TextField`)
+  (Navigation component, Safe Args, 
+  `TextField` with `FocusRequester` and `TextFieldValue`)
 - Swipe to delete items (`ItemTouchHelper`)
 - Store items in database (Room, coroutines)
 - Database migration
