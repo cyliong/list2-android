@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.ltp.list2.R
@@ -49,7 +50,7 @@ class ItemFragment : Fragment() {
             )
             setContent {
                 MaterialTheme {
-                    ItemForm(viewModel)
+                    ItemForm()
                 }
             }
         }
@@ -107,7 +108,7 @@ class ItemFragment : Fragment() {
 }
 
 @Composable
-private fun ItemForm(viewModel: ItemViewModel) {
+private fun ItemForm(viewModel: ItemViewModel = viewModel()) {
     ItemFormContent(
         item = viewModel.currentItem,
         onItemChange = viewModel::onItemChange,
