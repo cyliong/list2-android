@@ -52,7 +52,8 @@ class ListItemsAdapter : RecyclerView.Adapter<ListItemsAdapter.ViewHolder>() {
             itemView.setOnClickListener {
                 item?.let {
                     navController.navigate(
-                        ListItemsFragmentDirections.actionListItemsFragmentToItemFragment(it.id)
+                        ListItemsFragmentDirections
+                            .actionListItemsFragmentToItemFragment(it.id, "Edit Item")
                     )
                 }
             }

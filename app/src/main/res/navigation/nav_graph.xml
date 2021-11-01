@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/itemFragment"
         android:name="com.example.ltp.list2.ui.ItemFragment"
-        android:label="@string/edit_item_title" >
+        android:label="{title}" >
         <argument
             android:name="item_id"
             app:argType="integer"

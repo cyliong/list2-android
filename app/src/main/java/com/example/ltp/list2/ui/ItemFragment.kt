@@ -3,7 +3,6 @@ package com.example.ltp.list2.ui
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -60,19 +59,15 @@ class ItemFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val itemId = args.itemId
-        if (itemId > 0) {
-            if (savedInstanceState == null) {
-                viewModel.getItem(itemId).observe(viewLifecycleOwner, {
-                    it?.let {
-                        viewModel.currentItem = it
-                        viewModel.titleFieldValue =
-                            TextFieldValue(it.title, TextRange(it.title.length))
-                        viewModel.isNew = false
-                    }
-                })
-            }
-        } else {
-            (activity as AppCompatActivity).supportActionBar?.title = "New Item"
+        if (itemId > 0 && savedInstanceState == null) {
+            viewModel.getItem(itemId).observe(viewLifecycleOwner, {
+                it?.let {
+                    viewModel.currentItem = it
+                    viewModel.titleFieldValue =
+                        TextFieldValue(it.title, TextRange(it.title.length))
+                    viewModel.isNew = false
+                }
+            })
         }
     }
 
