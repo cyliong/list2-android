@@ -8,6 +8,7 @@ with various Android technologies and patterns, including:
 - Jetpack Compose 
   - Migrated from View-based UI, using `ComposeView`
   - State hoisting with `MutableState` and `ViewModel`
+  - Access `ViewModel` from composable using the `viewModel()` function
   - Composable preview
   - Side-effect API
 - View Binding
