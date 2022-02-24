@@ -27,12 +27,13 @@ with various Android technologies and patterns, including:
 - Database migration
 
 ## Widget
-This project also implements a widget that can be added to the Home screen, 
-with the following features:
+This project also implements a widget that can be added to 
+the Home screen, with the following features:
 - Display a list of items from the app's database 
   (`ListView`, `RemoteViewsService`, `RemoteViewsFactory`, Room)
 - Tap widget title bar to launch the app (`PendingIntent.getActivity()`)
-- Tap the Add button to launch the app's New Item screen (`NavDeepLinkBuilder`)
+- Tap the Add button to launch the app's New Item screen 
+  (`NavDeepLinkBuilder`)
 - Tap a list item to launch the app's Edit Item screen 
   (`PendingIntent` template, fill-in `Intent`, 
   `NavDeepLinkBuilder` with arguments)
@@ -40,6 +41,6 @@ with the following features:
   (Broadcast using the `ACTION_APPWIDGET_UPDATE` `Intent`)
 
 ## Requirements
-- Android Studio Bumblebee | 2021.1.1 Patch 1 or newer
+- Android Studio Bumblebee | 2021.1.1 Patch 2 or newer
 - Android 5.0 (API level 21) or higher
-- Kotlin 1.5 or higher
+- Kotlin 1.6 or higher
