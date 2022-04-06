@@ -60,14 +60,14 @@ class ItemFragment : Fragment() {
 
         val itemId = args.itemId
         if (itemId > 0 && savedInstanceState == null) {
-            viewModel.getItem(itemId).observe(viewLifecycleOwner, {
+            viewModel.getItem(itemId).observe(viewLifecycleOwner) {
                 it?.let {
                     viewModel.currentItem = it
                     viewModel.titleFieldValue =
                         TextFieldValue(it.title, TextRange(it.title.length))
                     viewModel.isNew = false
                 }
-            })
+            }
         }
     }
 
